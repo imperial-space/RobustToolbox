@@ -164,6 +164,8 @@ namespace Robust.Shared.Serialization
 
         public void DeserializeDirect<T>(Stream stream, out T value)
         {
+            stream = WrapDeserializeStream(stream); // Imperial Space <Защита от вложенных пакетов>
+
             var start = StartMeasureStats(stream);
             _serializer.DeserializeDirect(stream, out value);
             EndMeasureDeserialize(stream, start, typeof(T));
@@ -171,12 +173,18 @@ namespace Robust.Shared.Serialization
 
         public object Deserialize(Stream stream)
         {
+            stream = WrapDeserializeStream(stream); // Imperial Space <Защита от вложенных пакетов>
+
             var start = StartMeasureStats(stream);
             var result = _serializer.Deserialize(stream);
             EndMeasureDeserialize(stream, start, result.GetType());
 
             return result;
         }
+
+        // Imperial Space Start <Защита от вложенных пакетов>
+        protected virtual Stream WrapDeserializeStream(Stream stream) => stream;
+        // Imperial Space End <Защита от вложенных пакетов>
 
         public bool CanSerialize(Type type)
             => _serializableTypes.Contains(type);
