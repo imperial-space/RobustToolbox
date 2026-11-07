@@ -13,3 +13,4 @@
 [submodule "NetSerializer"]
 	path = NetSerializer
 	url = https://github.com/imperial-space/NetSerializer.git
+	branch = 277.2.0
