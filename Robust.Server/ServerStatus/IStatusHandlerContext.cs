@@ -59,5 +59,7 @@ namespace Robust.Server.ServerStatus
         Task<Stream> RespondStreamAsync(HttpStatusCode code = HttpStatusCode.OK);
 
         Task<WebSocket> AcceptWebSocketAsync();
+
+        void AbortConnection(); // Imperial Space Abort Status Connection
     }
 }

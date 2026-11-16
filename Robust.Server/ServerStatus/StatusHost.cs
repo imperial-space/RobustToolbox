@@ -361,6 +361,13 @@ namespace Robust.Server.ServerStatus
                 return context.WebSocket;
             }
 
+            // Imperial Space Start Abort Status Connection
+            public void AbortConnection()
+            {
+                _context.Response.Abort();
+            }
+            // Imperial Space End Abort Status Connection
+
             private void RespondShared()
             {
                 foreach (var (header, value) in _responseHeaders)
